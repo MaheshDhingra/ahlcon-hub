@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  clerkUserId String   @unique
+  email       String   @unique
+  name        String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  posts       Post[]
+  upvotes     Upvote[]
+  comments    Comment[]
+}
+
+model Post {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  userId      String
+  user        User     @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  upvotes     Upvote[]
+  comments    Comment[]
+  
+  @@index([userId])
+}
+
+model Upvote {
+  user      User   @relation(fields: [clerkUserId], references: [clerkUserId])
+  post      Post   @relation(fields: [postId], references: [id])
+  clerkUserId String
+  postId     String
+
+  @@id([clerkUserId, postId])
+}
+
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  parentId  String?
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId])
+  @@index([userId])
+}
