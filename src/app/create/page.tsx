@@ -38,11 +38,13 @@ export default function CreatePage() {
     type: "",
   });
 
+  // Redirect if not authenticated
   if (isLoaded && !userId) {
     router.push("/");
     return null;
   }
 
+  // Show loading state while checking auth
   if (!isLoaded) {
     return <div>Loading...</div>;
   }

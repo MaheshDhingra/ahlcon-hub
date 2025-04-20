@@ -110,3 +110,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines and our [Code of 
 
 This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
 
+<<<<<<< HEAD
+=======
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+>>>>>>> parent of 8c864cd (first commit)
