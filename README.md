@@ -115,6 +115,9 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 8c864cd (first commit)
+=======
 >>>>>>> parent of 8c864cd (first commit)
 =======
 >>>>>>> parent of 8c864cd (first commit)
