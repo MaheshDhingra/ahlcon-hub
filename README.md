@@ -1,37 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+ █     █░ ▄▄▄       █████▒▄▄▄       ██▓ ██▓    ▓█████  ▄▄▄       ███▄    █
+▓█░ █ ░█░▒████▄   ▓██   ▒▒████▄    ▓██▒▓██▒    ▓█   ▀ ▒████▄     ██ ▀█   █
+▒█░ █ ░█ ▒██  ▀█▄ ▒████ ░▒██  ▀█▄  ▒██ ▒██░    ▒███   ▒██  ▀█▄  ▓██  ▀█ ██▒
+░█░ █ ░█ ░██▄▄▄▄██░▓█▒  ░░██▄▄▄▄██ ░██░▒██░    ▒▓█  ▄ ░██▄▄▄▄██ ▓██▒  ▐▌██▒
+░░██▒██▓  ▓█   ▓██▒░▒█░   ▓█   ▓██▒░██░░██████▒░▒████▒ ▓█   ▓██▒▒██░   ▓██░
+░ ▓░▒ ▒   ▒▒   ▓▒█░ ▒ ░   ▒▒   ▓▒█░░▓  ░ ▒░▓  ░░░ ▒░ ░ ▒▒   ▓▒█░░ ▒░   ▒ ▒
+  ▒ ░ ░    ▒   ▒▒ ░ ░      ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░ ░ ░  ░  ▒   ▒▒ ░░ ░░   ░ ▒░
+  ░   ░    ░   ▒    ░ ░    ░   ▒    ▒ ░  ░ ░      ░     ░   ▒      ░   ░ ░
+    ░          ░  ░         ░  ░ ░      ░  ░   ░  ░       ░  ░         ░
 
-First, run the development server:
+# AhlconHub
 
+A student‑built discussion forum for Ahlcon Public School, enabling students to report issues, upvote suggestions, and engage in threaded conversations.
+
+---
+
+## 📖 Table of Contents
+
+- [✨ Features](#✨-features)  
+- [🛠️ Tech Stack](#🛠️-tech-stack)  
+- [🚀 Installation](#🚀-installation)  
+- [👩‍💻 Usage](#👩‍💻-usage)  
+- [🤝 Contributing](#🤝-contributing)  
+- [📄 License](#📄-license)  
+
+---
+
+## ✨ Features
+
+- 💬 **Discussion Threads** – Nested comments with upvote support  
+- 👍 **Upvoting System** – Surface the most popular posts quickly  
+- 🔒 **Authentication** – Secure sign‑in via Clerk  
+- 🚀 **Real‑Time Updates** – Optimistic UI with React‑Toastify notifications  
+- ⚙️ **Modular Design** – Extensible components and API routes  
+
+---
+
+## 🛠️ Tech Stack
+
+| Frontend         | Backend              | Database      | Authentication    |
+| ---------------- | -------------------- | ------------- | ----------------- |
+| Next.js (App Dir)| Next.js API Routes   | PostgreSQL    | Clerk             |
+| React & TypeScript| Prisma ORM          | Redis (cache) | JWT & OAuth       |
+| React‑Toastify   | Node.js & Vercel Edge|               |                   |
+
+---
+
+## 🚀 Installation
+
+1. **Clone the repository**  
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/MaheshDhingra/AhlconHub.git
+cd AhlconHub
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Set up environment variables**  
+```bash
+cp .env-example .env
+# Fill in DATABASE_URL, NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, etc.
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Install dependencies & generate Prisma client**  
+```bash
+npm install
+npm run postinstall  # prisma generate
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Run locally**  
+```bash
+npm run dev
+# Open http://localhost:3000
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 👩‍💻 Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Create a new post
+curl -X POST http://localhost:3000/api/posts \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Feature Request","content":"Add dark mode"}'
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Upvote a post
+curl -X POST http://localhost:3000/api/posts/1/upvote \
+  -H "Authorization: Bearer <token>"
+```
 
-## Deploy on Vercel
+Preview screenshots, demos, and more usage examples in the `docs/` directory.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# ahlcon-hub" 
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repo  
+2. Create a feature branch (`git checkout -b feature/YourFeature`)  
+3. Commit your changes (`git commit -m "feat: add new feature ✨"`)  
+4. Push to your branch (`git push origin feature/YourFeature`)  
+5. Open a Pull Request  
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines and our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+
